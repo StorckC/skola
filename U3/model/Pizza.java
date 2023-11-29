@@ -4,17 +4,19 @@ import java.util.Arrays;
 
 public class Pizza {
     private String name;
-    private int price = 0;
+    private double price = 0.0;
 
-    private String [] toppings;
+    private double basePrice = 100.0;
 
-    public Pizza(String name, int price, String[] toppings) {
+    private Toppings[] toppings;
+
+    public Pizza(String name,  double price, Toppings[] toppings) {
         this.name = name;
         this.price = price;
         this.toppings = toppings;
     }
 
-    public Pizza(String name, int price) {
+    public Pizza(String name, double price) {
         this.name = name;
         this.price = price;
     }
@@ -27,7 +29,7 @@ public class Pizza {
         this.name = name;
     }
 
-    public int getPrice() {
+    public double getPrice() {
         return price;
     }
 
@@ -35,14 +37,22 @@ public class Pizza {
         this.price = price;
     }
 
-    public String[] getToppings() {
+    public Toppings[] getToppings() {
         return toppings;
     }
 
-    public void setToppings(String[] toppings) {
+    public void setToppings(Toppings[] toppings) {
         this.toppings = toppings;
     }
 
+
+    public double getBasePrice() {
+        return basePrice;
+    }
+
+    public void setBasePrice(double basePrice) {
+        this.basePrice = basePrice;
+    }
 
     @Override
     public String toString() {

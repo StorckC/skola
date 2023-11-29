@@ -17,7 +17,8 @@ public class Controller {
     private String [] order1Simulation; // for test purposes - delete if not used in final solution
     private String [] currentOrderArray; // for test purposes - delete if not used in final solution
     private double costCurrentOrder = 0; // for test purposes - delete if not used in final solution
-    private int nbrOfOrders = 0; // for test purposes - delete if not used in final solution
+    private int nbrOfOrders = 0; //// for test purposes - delete if not used in final solution
+    private double toppingsPrice;
 
     public Controller() {
         view = new MainFrame(1000, 500, this);
@@ -35,16 +36,23 @@ public class Controller {
         order1Simulation = new String[10];
         currentOrderArray = new String[10];
 
-        Pizza pizza1 = new Pizza("Margarita", 50);
-        Pizza pizza2 = new Pizza("Vesuvio", 60);
-        Pizza pizza3 = new Pizza("Kebabpizza", 100);
-        Pizza pizza4 = new Pizza("Pepperoni", 60);
-        Pizza pizza5 = new Pizza("Chris Special", 2000);
-        foodMenuString[0] = pizza1.toString();
-        foodMenuString[1] = pizza2.toString();
-        foodMenuString[2] = pizza3.toString();
-        foodMenuString[3] = pizza4.toString();
-        foodMenuString[4] = pizza5.toString();
+        Toppings[] margaritaToppings = {Toppings.tomatoSauce, Toppings.cheese};
+        Toppings[] vesuvioToppings = {Toppings.tomatoSauce, Toppings.cheese, Toppings.ham};
+        Toppings[] kebabToppings = {Toppings.tomatoSauce, Toppings.cheese, Toppings.kebab, Toppings.kebabSauce, Toppings.redOnion};
+        Toppings[] pepperoniToppings = {Toppings.tomatoSauce, Toppings.cheese, Toppings.pepperoni};
+        Toppings[] chrisSpecialToppings = {Toppings.tomatoSauce, Toppings.cheese, Toppings.ham, Toppings.kebab, Toppings.fries, Toppings.kebabSauce,Toppings.onion};
+
+        Pizza margarita = new Pizza("Margarita", calculateToppings(margaritaToppings), margaritaToppings);
+        Pizza vesuvio = new Pizza("Vesuvio", calculateToppings(vesuvioToppings), vesuvioToppings);
+        Pizza kebabPizza = new Pizza("Kebabpizza", calculateToppings(kebabToppings), kebabToppings);
+        Pizza pepperoni = new Pizza("Pepperoni", calculateToppings(pepperoniToppings), pepperoniToppings);
+        Pizza chrisSpecial = new Pizza("Chris Special", calculateToppings(chrisSpecialToppings), chrisSpecialToppings);
+
+        foodMenuString[0] = margarita.toString();
+        foodMenuString[1] = vesuvio.toString();
+        foodMenuString[2] = kebabPizza.toString();
+        foodMenuString[3] = pepperoni.toString();
+        foodMenuString[4] = chrisSpecial.toString();
 
         drinkMenuString[0] = "dryck1, dryckPris1";
         drinkMenuString[1] = "dryck2, alkohol %, dryckPris2";
@@ -172,7 +180,14 @@ public class Controller {
         view.disableViewSelectedOrderButton();
     }
 
-    //public
+    public double calculateToppings(Toppings[]toppings){
+        for (Toppings topping: toppings){
+            toppingsPrice += topping.getPrice();
+        }
+        return toppingsPrice;
+    }
+    
+
 
     // skapa ålderskontroll för dryck >= 18
 
